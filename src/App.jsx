@@ -26,7 +26,7 @@ export default function Portfolio() {
       <nav className="fixed top-0 left-0 w-full backdrop-blur-md bg-black/30 dark:bg-black/30 bg-white/70 z-50 border-b border-gray-800">
         <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
           <h1 className="text-2xl font-bold tracking-wide">
-            Ranjitha<span className="text-purple-500">.</span>
+            Ranjitha Sangam S S<span className="text-purple-500">.</span>
           </h1>
 
           <ul className="hidden md:flex gap-8 text-sm font-medium">
@@ -75,7 +75,7 @@ export default function Portfolio() {
           </p>
 
           <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
-            Hi, I'm <span className="text-purple-500">Ranjitha Sangam</span>
+            Hi, I'm <span className="text-purple-500">Ranjitha Sangam S S</span>
           </h1>
 
           <h2 className="text-xl md:text-2xl text-gray-400 font-medium">
@@ -102,6 +102,14 @@ export default function Portfolio() {
               className="px-6 py-3 rounded-2xl border border-purple-500 hover:bg-purple-500 hover:text-white transition duration-300"
             >
               GitHub
+            </a>
+
+            <a
+              href="/resume.pdf"
+              download
+              className="px-6 py-3 rounded-2xl border border-purple-500 hover:bg-purple-500 hover:text-white transition duration-300"
+            >
+              Download Resume
             </a>
 
             <a
@@ -191,16 +199,21 @@ export default function Portfolio() {
               </h3>
 
               <div className="flex flex-wrap gap-3">
-                {["Node.js", "Express.js", "Mongoose", "REST APIs","MongoDB", "SQL"].map(
-                  (skill, index) => (
-                    <span
-                      key={index}
-                      className="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm"
-                    >
-                      {skill}
-                    </span>
-                  ),
-                )}
+                {[
+                  "Node.js",
+                  "Express.js",
+                  "Mongoose",
+                  "REST APIs",
+                  "MongoDB",
+                  "SQL",
+                ].map((skill, index) => (
+                  <span
+                    key={index}
+                    className="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -221,7 +234,6 @@ export default function Portfolio() {
                 ))}
               </div>
             </div>
-
 
             {/* Tools */}
             <div className="bg-black border border-gray-800 rounded-3xl p-8 hover:border-purple-500 transition duration-300">
