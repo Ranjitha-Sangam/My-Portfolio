@@ -1,9 +1,23 @@
+import { useState } from "react";
 import profile from "./assets/ranjitha.jpg";
 
 export default function Portfolio() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const projects = [
     {
+      title: "CampusHire",
+      subtitle: "Placement Management Platform",
+      description:
+        "A full-stack placement platform that helps students discover opportunities, track applications, manage profiles, and prepare for their careers.",
+      tech: ["React.js", "Node.js", "Express.js", "MongoDB"],
+      featured: true,
+      live: "https://campushire-frontend-4da2.onrender.com",
+      github: "https://github.com/Ranjitha-Sangam/CampusHire",
+    },
+    {
       title: "Nestifyy",
+      subtitle: "Accommodation Platform",
       description:
         "A full-stack accommodation platform with authentication, reviews, image uploads, and interactive maps.",
       tech: ["Node.js", "Express.js", "MongoDB", "Bootstrap"],
@@ -12,343 +26,502 @@ export default function Portfolio() {
     },
     {
       title: "Weather App",
+      subtitle: "React Weather Application",
       description:
-        "Responsive React weather application using OpenWeather API with real-time weather updates.",
+        "A responsive weather application that provides real-time weather information using the OpenWeather API.",
       tech: ["React.js", "API", "CSS", "Render"],
       live: "https://weather-app-react-vdh8.onrender.com",
       github: "https://github.com/Ranjitha-Sangam/weather-app-react",
     },
   ];
 
-  return (
-    <div className="min-h-screen bg-black text-white transition-all duration-500 dark:bg-black dark:text-white bg-white text-black">
-      {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full backdrop-blur-md bg-black/30 dark:bg-black/30 bg-white/70 z-50 border-b border-gray-800">
-        <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-          <h1 className="text-2xl font-bold tracking-wide">
-            Ranjitha Sangam S S<span className="text-purple-500">.</span>
-          </h1>
+  const skills = [
+    {
+      title: "Frontend",
+      icon: "◈",
+      skills: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React.js",
+        "Bootstrap",
+        "Tailwind CSS",
+      ],
+    },
+    {
+      title: "Backend",
+      icon: "⌘",
+      skills: ["Node.js", "Express.js", "REST APIs", "Mongoose"],
+    },
+    {
+      title: "Database",
+      icon: "◉",
+      skills: ["MongoDB", "SQL"],
+    },
+    {
+      title: "Programming",
+      icon: "</>",
+      skills: ["Java", "C", "DSA"],
+    },
+    {
+      title: "Tools",
+      icon: "⚙",
+      skills: ["Git", "GitHub", "Docker", "VS Code"],
+    },
+  ];
 
-          <ul className="hidden md:flex gap-8 text-sm font-medium">
-            <li>
-              <a href="#home" className="hover:text-purple-500">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#about" className="hover:text-purple-500">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#skills" className="hover:text-purple-500">
-                Skills
-              </a>
-            </li>
-            <li>
-              <a href="#projects" className="hover:text-purple-500">
-                Projects
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="hover:text-purple-500">
-                Contact
-              </a>
-            </li>
+  const navItems = ["Home", "About", "Skills", "Projects", "Contact"];
+
+  return (
+    <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden">
+      {/* Background glow */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]" />
+        <div className="absolute top-[40%] -right-40 w-96 h-96 bg-fuchsia-600/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-[40%] w-96 h-96 bg-violet-600/10 rounded-full blur-[120px]" />
+      </div>
+
+      {/* NAVBAR */}
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/60 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a
+            href="#home"
+            className="text-xl md:text-2xl font-bold tracking-tight"
+          >
+            Ranjitha
+            <span className="text-purple-500">.</span>
+          </a>
+
+          {/* Desktop navigation */}
+          <ul className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <li key={item}>
+                <a
+                  href={`#${item.toLowerCase()}`}
+                  className="text-sm text-gray-400 hover:text-white transition duration-300 relative group"
+                >
+                  {item}
+                  <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-purple-500 group-hover:w-full transition-all duration-300" />
+                </a>
+              </li>
+            ))}
           </ul>
+
+          {/* <a
+            href="#contact"
+            className="hidden md:block px-5 py-2.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-purple-500 hover:text-white transition duration-300"
+          >
+            Let's Talk
+          </a> */}
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden text-2xl text-gray-300"
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
         </div>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="md:hidden border-t border-white/10 bg-black/95 px-6 py-5">
+            <div className="flex flex-col gap-5">
+              {navItems.map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setMenuOpen(false)}
+                  className="text-gray-300 hover:text-purple-400 transition"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </nav>
 
-      {/* Hero Section */}
+      {/* HERO */}
       <section
         id="home"
-        className="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-40"
+        className="relative min-h-screen flex items-center pt-28 px-6"
       >
-        <div className="space-y-6">
-          <img
-            src={profile}
-            alt="Ranjitha"
-            className="w-40 h-40 md:w-52 md:h-52 rounded-full mx-auto object-cover border-4 border-purple-500 shadow-2xl hover:scale-105 transition duration-300"
-          />
-          <p className="text-purple-500 uppercase tracking-[6px] text-sm">
-            Welcome To My Portfolio
-          </p>
-
-          <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
-            Hi, I'm <span className="text-purple-500">Ranjitha Sangam S S</span>
-          </h1>
-
-          <h2 className="text-xl md:text-2xl text-gray-400 font-medium">
-            MCA Student | Software Developer | DSA Enthusiast
-          </h2>
-
-          <p className="max-w-2xl text-gray-400 mx-auto leading-relaxed">
-            Passionate about building modern web applications using React,
-            Node.js, Express.js and MongoDB. Focused on improving problem
-            solving and full-stack development skills.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <a
-              href="#projects"
-              className="px-6 py-3 rounded-2xl bg-purple-600 hover:bg-purple-700 transition duration-300"
-            >
-              View Projects
-            </a>
-
-            <a
-              href="https://github.com/Ranjitha-Sangam"
-              target="_blank"
-              className="px-6 py-3 rounded-2xl border border-purple-500 hover:bg-purple-500 hover:text-white transition duration-300"
-            >
-              GitHub
-            </a>
-
-            <a
-              href="/resume.pdf"
-              download
-              className="px-6 py-3 rounded-2xl border border-purple-500 hover:bg-purple-500 hover:text-white transition duration-300"
-            >
-              Download Resume
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/ranjitha-sangam/"
-              target="_blank"
-              className="px-6 py-3 rounded-2xl border border-purple-500 hover:bg-purple-500 hover:text-white transition duration-300"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section id="about" className="py-24 px-6 max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-4xl font-bold mb-6">
-              About <span className="text-purple-500">Me</span>
-            </h2>
-
-            <p className="text-gray-400 leading-8 text-lg">
-              I’m an MCA student passionate about full-stack development and
-              problem solving. I enjoy building responsive and scalable web
-              applications using modern technologies like React.js, Node.js,
-              Express.js, and MongoDB.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-8 rounded-3xl border border-gray-800 shadow-2xl">
-            <h3 className="text-2xl font-semibold mb-4 text-purple-400">
-              Education
-            </h3>
-
-            <div className="space-y-4 text-gray-300">
-              <div>
-                <h4 className="font-semibold">MCA</h4>
-                <p>Sir MVIT Bengaluru • 8.4 CGPA</p>
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left */}
+            <div className="order-2 lg:order-1">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-sm">
+                <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                Open to Software Development Opportunities
               </div>
 
-              <div>
-                <h4 className="font-semibold">BCA</h4>
-                <p>Yuvarajas College Mysore • 9.03 CGPA</p>
+              <p className="text-purple-400 tracking-[5px] uppercase text-sm mb-5">
+                Hello, I'm
+              </p>
+
+              <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight">
+                Ranjitha
+                <br />
+                <span className="bg-gradient-to-r from-purple-400 via-fuchsia-400 to-purple-600 bg-clip-text text-transparent">
+                  Sangam S S
+                </span>
+              </h1>
+
+              <h2 className="mt-6 text-xl md:text-2xl text-gray-300 font-medium">
+                MCA Graduate <span className="text-purple-500">•</span> Software
+                Developer <span className="text-purple-500">•</span> DSA
+                Enthusiast
+              </h2>
+
+              <p className="mt-6 max-w-2xl text-gray-400 text-lg leading-8">
+                I build modern, responsive web applications and enjoy solving
+                problems with clean and practical code. Currently focused on
+                full-stack development and strengthening my DSA skills.
+              </p>
+
+              <div className="flex flex-wrap gap-4 mt-9">
+                <a
+                  href="#projects"
+                  className="px-7 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 shadow-lg shadow-purple-600/20 transition duration-300 font-semibold"
+                >
+                  View My Work →
+                </a>
+
+                <a
+                  href="/resume.pdf"
+                  download
+                  className="px-7 py-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition duration-300 font-semibold"
+                >
+                  Download Resume
+                </a>
+              </div>
+
+              <div className="flex gap-6 mt-8 text-sm text-gray-500">
+                <a
+                  href="https://github.com/Ranjitha-Sangam"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition"
+                >
+                  GitHub ↗
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/ranjitha-sangam/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition"
+                >
+                  LinkedIn ↗
+                </a>
+              </div>
+            </div>
+
+            {/* Right profile */}
+            <div className="order-1 lg:order-2 flex justify-center">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-purple-600/20 blur-[70px]" />
+
+                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full p-1 bg-gradient-to-br from-purple-400 via-fuchsia-500 to-purple-800">
+                  <div className="w-full h-full rounded-full bg-[#080808] p-2">
+                    <img
+                      src={profile}
+                      alt="Ranjitha"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  </div>
+                </div>
+
+                <div className="absolute -bottom-5 -left-10 px-5 py-3 rounded-2xl border border-white/10 bg-black/80 backdrop-blur-xl shadow-xl">
+                  <p className="text-xs text-gray-500">Currently building</p>
+                  <p className="text-sm font-semibold text-purple-300">
+                    Full Stack Projects
+                  </p>
+                </div>
+
+                <div className="absolute -top-5 -right-8 px-5 py-3 rounded-2xl border border-white/10 bg-black/80 backdrop-blur-xl">
+                  <p className="text-sm font-bold">MCA</p>
+                  <p className="text-xs text-gray-500">Student</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Skills */}
-      <section id="skills" className="py-24 px-6 bg-zinc-950">
+      {/* ABOUT */}
+      <section id="about" className="relative py-28 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">
-            Tech <span className="text-purple-500">Skills</span>
-          </h2>
+          <SectionTitle small="GET TO KNOW ME" title="About" highlight="Me" />
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Frontend */}
-            <div className="bg-black border border-gray-800 rounded-3xl p-8 hover:border-purple-500 transition duration-300">
-              <h3 className="text-2xl font-semibold mb-6 text-purple-400">
-                Frontend
-              </h3>
+          <div className="grid lg:grid-cols-5 gap-8 mt-16">
+            <div className="lg:col-span-3 rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+              <div className="flex items-center gap-3 mb-7">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                  👩‍💻
+                </div>
+                <h3 className="text-2xl font-bold">Who I Am</h3>
+              </div>
 
-              <div className="flex flex-wrap gap-3">
-                {[
-                  "HTML",
-                  "CSS",
-                  "JavaScript",
-                  "React.js",
-                  "Bootstrap",
-                  "Tailwind CSS",
-                ].map((skill, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm"
-                  >
-                    {skill}
-                  </span>
-                ))}
+              <p className="text-gray-400 leading-8 text-lg">
+                I'm an MCA Graduate, passionate about full-stack development and problem
+                solving. I enjoy turning ideas into functional, responsive web
+                applications using technologies like React.js, Node.js,
+                Express.js and MongoDB.
+              </p>
+
+              <p className="text-gray-400 leading-8 text-lg mt-5">
+                I am continuously learning, building projects and improving my
+                DSA skills with Java. My goal is to grow as a software developer
+                and contribute to meaningful products.
+              </p>
+
+              <div className="grid grid-cols-3 gap-4 mt-9">
+                <Stat number="3+" label="Projects" />
+                <Stat number="MERN" label="Stack" />
+                <Stat number="Java" label="DSA" />
               </div>
             </div>
 
-            {/* Backend */}
-            <div className="bg-black border border-gray-800 rounded-3xl p-8 hover:border-purple-500 transition duration-300">
-              <h3 className="text-2xl font-semibold mb-6 text-purple-400">
-                Backend And Database
-              </h3>
+            <div className="lg:col-span-2 rounded-3xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-fuchsia-500/5 p-8 md:p-10">
+              <p className="text-purple-400 text-sm font-semibold tracking-widest uppercase mb-8">
+                Education
+              </p>
 
-              <div className="flex flex-wrap gap-3">
-                {[
-                  "Node.js",
-                  "Express.js",
-                  "Mongoose",
-                  "REST APIs",
-                  "MongoDB",
-                  "SQL",
-                ].map((skill, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm"
-                  >
-                    {skill}
-                  </span>
-                ))}
+              <div className="space-y-8">
+                <Education
+                  degree="MCA"
+                  college="Sir MVIT Bengaluru"
+                  score="8.96 CGPA"
+                />
+
+                <div className="w-full h-px bg-white/10" />
+
+                <Education
+                  degree="BCA"
+                  college="Yuvarajas College Mysore"
+                  score="9.03 CGPA"
+                />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Programming */}
-            <div className="bg-black border border-gray-800 rounded-3xl p-8 hover:border-purple-500 transition duration-300">
-              <h3 className="text-2xl font-semibold mb-6 text-purple-400">
-                Programming
-              </h3>
+      {/* SKILLS */}
+      <section id="skills" className="relative py-28 px-6 bg-white/[0.02]">
+        <div className="max-w-6xl mx-auto">
+          <SectionTitle
+            small="WHAT I WORK WITH"
+            title="Technical"
+            highlight="Skills"
+          />
 
-              <div className="flex flex-wrap gap-3">
-                {["Java", "C", "DSA"].map((skill, index) => (
-                  <span
-                    key={index}
-                    className="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-16">
+            {skills.map((category) => (
+              <div
+                key={category.title}
+                className="group rounded-3xl border border-white/10 bg-black/40 p-7 hover:border-purple-500/50 hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+                    {category.icon}
+                  </div>
 
-            {/* Tools */}
-            <div className="bg-black border border-gray-800 rounded-3xl p-8 hover:border-purple-500 transition duration-300">
-              <h3 className="text-2xl font-semibold mb-6 text-purple-400">
-                Tools
-              </h3>
+                  <h3 className="text-xl font-bold">{category.title}</h3>
+                </div>
 
-              <div className="flex flex-wrap gap-3">
-                {["Git", "GitHub", "VS Code", "Turbo C++"].map(
-                  (skill, index) => (
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
                     <span
-                      key={index}
-                      className="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm"
+                      key={skill}
+                      className="px-3 py-2 rounded-lg bg-white/[0.05] border border-white/10 text-sm text-gray-300 group-hover:border-purple-500/20 transition"
                     >
                       {skill}
                     </span>
-                  ),
-                )}
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="py-24 px-6 max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-16">
-          My <span className="text-purple-500">Projects</span>
-        </h2>
+      {/* PROJECTS */}
+      <section id="projects" className="relative py-28 px-6">
+        <div className="max-w-7xl mx-auto">
+          <SectionTitle
+            small="WHAT I'VE BUILT"
+            title="Featured"
+            highlight="Projects"
+          />
 
-        <div className="grid md:grid-cols-2 gap-10">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="bg-zinc-950 border border-gray-800 rounded-3xl overflow-hidden hover:border-purple-500 transition duration-300 shadow-2xl"
-            >
-              <div className="h-52 bg-gradient-to-r from-purple-500/20 to-pink-500/20 flex items-center justify-center text-2xl font-bold">
-                {project.title}
-              </div>
+          <div className="grid md:grid-cols-2 gap-7 mt-16">
+            {projects.map((project, index) => (
+              <div
+                key={project.title}
+                className={`group relative overflow-hidden rounded-3xl border border-white/10 
+          bg-white/[0.03] p-8 
+          hover:border-purple-500/50 
+          hover:-translate-y-2 
+          transition-all duration-500
+          ${project.featured ? "md:col-span-2" : ""}`}
+              >
+                {/* Number */}
+                <div className="absolute top-6 right-7 text-6xl font-black text-white/[0.03]">
+                  0{index + 1}
+                </div>
 
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
+                {/* Featured badge */}
+                {project.featured && (
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold mb-6">
+                    ⭐ FEATURED PROJECT
+                  </div>
+                )}
 
-                <p className="text-gray-400 leading-7 mb-6">
+                <p className="text-purple-400 text-sm font-medium mb-2">
+                  {project.subtitle}
+                </p>
+
+                <h3 className="text-3xl md:text-4xl font-bold mb-5">
+                  {project.title}
+                </h3>
+
+                <p className="text-gray-400 leading-7 max-w-3xl">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-3 mb-6">
-                  {project.tech.map((item, i) => (
+                {/* Tech stack */}
+                <div className="flex flex-wrap gap-2 mt-7">
+                  {project.tech.map((tech) => (
                     <span
-                      key={i}
-                      className="px-4 py-2 rounded-full bg-purple-500/20 text-purple-300 text-sm"
+                      key={tech}
+                      className="px-3 py-2 rounded-lg bg-purple-500/10 
+                border border-purple-500/15 text-purple-300 text-sm"
                     >
-                      {item}
+                      {tech}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex gap-4">
+                {/* Buttons */}
+                <div className="flex gap-3 mt-8">
                   <a
                     href={project.live}
                     target="_blank"
-                    className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 transition"
+                    rel="noreferrer"
+                    className="px-5 py-3 rounded-xl bg-purple-600 
+              hover:bg-purple-500 transition font-semibold text-sm"
                   >
-                    Live Demo
+                    Live Demo ↗
                   </a>
 
                   <a
                     href={project.github}
                     target="_blank"
-                    className="px-5 py-3 rounded-xl border border-purple-500 hover:bg-purple-500 transition"
+                    rel="noreferrer"
+                    className="px-5 py-3 rounded-xl border border-white/15 
+              hover:bg-white/10 transition font-semibold text-sm"
                   >
-                    GitHub
+                    GitHub ↗
                   </a>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="py-24 px-6 bg-zinc-950">
+      {/* CONTACT */}
+      <section id="contact" className="relative py-28 px-6 bg-white/[0.02]">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8">
-            Contact <span className="text-purple-500">Me</span>
-          </h2>
-
-          <p className="text-gray-400 text-lg mb-10">
-            Let's connect and build something amazing together.
+          <p className="text-purple-400 text-sm font-semibold tracking-[4px] uppercase">
+            GET IN TOUCH
           </p>
 
-          <div className="flex flex-col md:flex-row justify-center gap-6">
-            <a
-              href="mailto:ranjithasangamss@gmail.com"
-              className="px-6 py-4 rounded-2xl bg-black border border-gray-700 hover:border-purple-500 transition"
-            >
-              ranjithasangamss@gmail.com
-            </a>
+          <h2 className="text-4xl md:text-6xl font-black mt-5">
+            Let's build something
+            <span className="text-purple-500"> great.</span>
+          </h2>
+
+          <p className="text-gray-400 text-lg mt-6 max-w-2xl mx-auto leading-8">
+            I'm always open to discussing software development opportunities,
+            projects and new ideas.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 mt-10">
 
             <a
               href="https://github.com/Ranjitha-Sangam"
               target="_blank"
-              className="px-6 py-4 rounded-2xl bg-black border border-gray-700 hover:border-purple-500 transition"
+              rel="noreferrer"
+              className="px-7 py-4 rounded-xl border border-white/15 hover:bg-white/10 transition font-semibold"
             >
-              GitHub
+              GitHub ↗
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/ranjitha-sangam/"
+              target="_blank"
+              rel="noreferrer"
+              className="px-7 py-4 rounded-xl border border-white/15 hover:bg-white/10 transition font-semibold"
+            >
+              LinkedIn ↗
             </a>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 text-center border-t border-gray-800 text-gray-500 text-sm">
-        © 2026 Ranjitha Sangam S S • Built with React & Tailwind CSS
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 py-8 text-center text-gray-500 text-sm">
+        © 2026 Ranjitha Sangam S S<span className="mx-2">•</span>
+        Built with React & Tailwind CSS
       </footer>
+    </div>
+  );
+}
+
+/* ---------- Small Components ---------- */
+
+function SectionTitle({ small, title, highlight }) {
+  return (
+    <div className="text-center">
+      <p className="text-purple-400 text-xs font-bold tracking-[4px] uppercase">
+        {small}
+      </p>
+
+      <h2 className="text-4xl md:text-5xl font-black mt-4">
+        {title} <span className="text-purple-500">{highlight}</span>
+      </h2>
+
+      <div className="w-16 h-1 bg-purple-500 rounded-full mx-auto mt-6" />
+    </div>
+  );
+}
+
+function Stat({ number, label }) {
+  return (
+    <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-4 text-center">
+      <p className="text-xl font-bold text-purple-400">{number}</p>
+      <p className="text-xs text-gray-500 mt-1">{label}</p>
+    </div>
+  );
+}
+
+function Education({ degree, college, score }) {
+  return (
+    <div>
+      <div className="flex justify-between items-start gap-4">
+        <div>
+          <h3 className="text-xl font-bold">{degree}</h3>
+          <p className="text-gray-500 mt-2">{college}</p>
+        </div>
+
+        <span className="px-3 py-1.5 rounded-lg bg-purple-500/10 text-purple-300 text-sm whitespace-nowrap">
+          {score}
+        </span>
+      </div>
     </div>
   );
 }
