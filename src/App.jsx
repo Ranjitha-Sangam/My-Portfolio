@@ -107,12 +107,7 @@ export default function Portfolio() {
             ))}
           </ul>
 
-          {/* <a
-            href="#contact"
-            className="hidden md:block px-5 py-2.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-purple-500 hover:text-white transition duration-300"
-          >
-            Let's Talk
-          </a> */}
+      
 
           {/* Mobile menu button */}
           <button
@@ -189,7 +184,7 @@ export default function Portfolio() {
                 </a>
 
                 <a
-                  href="/resume.pdf"
+                  href="/ranjitha_sangam_resume.pdf"
                   download
                   className="px-7 py-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 transition duration-300 font-semibold"
                 >
